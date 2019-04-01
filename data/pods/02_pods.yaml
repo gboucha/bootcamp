@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-multi-app
+  labels:
+    env: formation
+spec:
+  containers:
+  - name: redis
+    image: redis
+  - name: nginx
+    image: nginx
+  - name: postgres
+    image: postgres
+      
