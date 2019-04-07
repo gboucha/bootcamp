@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mynginxdeploymentyaml
+  labels:
+    app: mynginxdeploymentyaml
+spec:
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: mynginxdeploymentyaml
+  template:
+    metadata:
+      labels:
+        app: mynginxdeploymentyaml
+    spec:
+      containers:
+      - name: nginx
+        image: nginx

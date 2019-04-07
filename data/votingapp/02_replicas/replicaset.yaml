@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: db
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: db
+  template:
+    metadata:
+      labels:
+        name: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:10.4
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: redis
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: worker
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: worker
+  template:
+    metadata:
+      labels:
+        name: worker
+    spec:
+      containers:
+      - name: worker
+        image: wikitops/examplevotingapp-worker:1.1
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: result
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: result
+  template:
+    metadata:
+      labels:
+        name: result
+    spec:
+      containers:
+      - name: result
+        image: wikitops/examplevotingapp-result:1.1
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: vote
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: vote
+  template:
+    metadata:
+      labels:
+        name: vote
+    spec:
+      containers:
+      - name: vote
+        image: wikitops/examplevotingapp-vote:1.1

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mynginxreplicaset
+  labels:
+    app: mynginxreplicaset
+    env: formation
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mynginxreplicaset
+    matchExpressions:
+      - {key: app, operator: In, values: [mynginxreplicaset]}
+  template:
+    metadata:
+      labels:
+        app: mynginxreplicaset
+        env: formation
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
